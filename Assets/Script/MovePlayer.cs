@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class MovePlayer : MonoBehaviour
 {    
-    private float speed = 5.0f; 
-    Transform dir;    
+    public NavMeshAgent agent;
+    RaycastHit hit;
+    Ray ray;
     void Update()
     {
         PlayerMove();
@@ -13,11 +14,12 @@ public class MovePlayer : MonoBehaviour
 
     void PlayerMove()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        transform.Translate(dir.right * Time.deltaTime * speed * horizontal, Space.World);
-        transform.Translate(dir.forward * Time.deltaTime * speed * vertical, Space.World);
+        if (Input.GetMouseButton(1))
+        {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+                agent.SetDestination(hit.point);
+        }
     }
 
 }

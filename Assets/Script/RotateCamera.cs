@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Cinemachine;
 
 public class RotateCamera : MonoBehaviour
 {
@@ -10,35 +11,31 @@ public class RotateCamera : MonoBehaviour
 
     [SerializeField]
     private Camera mainCamera;
-    
-    void Update()
+    [SerializeField]
+    private Transform target;
+    private Vector3 cameraPosition;
+    void LateUpdate()
     {
+        FixCam();
         Zoom();
-        Rotate();
     }
 
     private void Zoom()
     {
         float distance = Input.GetAxis("Mouse ScrollWheel") * -1 * zoomSpeed;
-        if (distance != 0)
-        {
+        if (distance != 0 )
+        {            
             mainCamera.fieldOfView += distance;
         }
     }
 
-    private void Move()
+    private void FixCam()
     {
-        
-    }
-    private void Rotate()
-    {
-        if (Input.GetMouseButton(1))
-        {
-            Vector3 rot = transform.rotation.eulerAngles; // 현재 카메라의 각도를 Vector3로 반환
-            rot.y += Input.GetAxis("Mouse X") * (rotateSpeed); // 마우스 X 위치 * 회전 스피드            
-            Quaternion q = Quaternion.Euler(rot); // Quaternion으로 변환
-            q.z = 0;
-            transform.rotation = Quaternion.Slerp(transform.rotation, q, 2f); // 자연스럽게 회전
-        }
+        cameraPosition.x = target.position.x;
+        cameraPosition.y = target.position.y + 5f;
+        cameraPosition.z = target.position.z + (-4.5f);
+
+        transform.position = cameraPosition;
+        transform.LookAt(target);
     }
 }
