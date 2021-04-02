@@ -7,6 +7,7 @@ public class MovePlayer : MonoBehaviour
     public NavMeshAgent agent;
     RaycastHit hit;
     Ray ray;
+    [SerializeField] private GameObject effect;
     void Update()
     {
         PlayerMove();
@@ -14,12 +15,19 @@ public class MovePlayer : MonoBehaviour
 
     void PlayerMove()
     {
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
-                agent.SetDestination(hit.point);
+            {
+                agent.SetDestination(hit.point);                
+                ClickEffect(hit.point);                
+            }                
         }
     }
 
+    void ClickEffect(Vector3 pos)
+    {
+        Instantiate(effect, pos, Quaternion.identity);
+    }
 }

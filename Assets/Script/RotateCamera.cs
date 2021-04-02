@@ -14,28 +14,45 @@ public class RotateCamera : MonoBehaviour
     [SerializeField]
     private Transform target;
     private Vector3 cameraPosition;
+    public Vector3 offset;
+    public bool RotateAroundPlayer = true;
+    
     void LateUpdate()
     {
         FixCam();
         Zoom();
+        Rotate();
     }
 
     private void Zoom()
     {
-        float distance = Input.GetAxis("Mouse ScrollWheel") * -1 * zoomSpeed;
+        float distance = Input.GetAxis("Mouse ScrollWheel") * -0.1f * zoomSpeed;
         if (distance != 0 )
         {            
-            mainCamera.fieldOfView += distance;
+            offset.y += distance;
+            offset.z += distance;
         }
     }
 
     private void FixCam()
     {
-        cameraPosition.x = target.position.x;
-        cameraPosition.y = target.position.y + 5f;
-        cameraPosition.z = target.position.z + (-4.5f);
+        cameraPosition.x = target.position.x + offset.x;
+        cameraPosition.y = target.position.y + offset.y;
+        cameraPosition.z = target.position.z + offset.z;
 
         transform.position = cameraPosition;
         transform.LookAt(target);
+    }
+
+    private void Rotate()
+    {        
+        if(Input.GetKey(KeyCode.LeftAlt) && Input.GetMouseButton(0))
+        {
+            Quaternion camTurnAngle = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * rotateSpeed, Vector3.up);
+            offset = camTurnAngle * offset;
+            Vector3 newPos = target.position + offset;
+            transform.position = Vector3.Slerp(transform.position, newPos, .5f);
+            transform.LookAt(target);
+        }
     }
 }

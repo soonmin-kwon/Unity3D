@@ -484,6 +484,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1558504176}
+  effect: {fileID: 100014, guid: 11926e1938b62114cb1bec2050650d19, type: 3}
 --- !u!54 &1558504175
 Rigidbody:
   m_ObjectHideFlags: 0
