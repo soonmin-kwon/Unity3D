@@ -1126,6 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1920190890}
   effect: {fileID: 100014, guid: 11926e1938b62114cb1bec2050650d19, type: 3}
+  anim: {fileID: 1920190891}
 --- !u!54 &1920190889
 Rigidbody:
   m_ObjectHideFlags: 0

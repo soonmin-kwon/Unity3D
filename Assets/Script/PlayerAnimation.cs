@@ -16,7 +16,7 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     void MoveAnim()
-    {
+    {        
         if (player.hasPath)
         {
             anim.SetBool("Run", true);
