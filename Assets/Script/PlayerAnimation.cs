@@ -19,11 +19,7 @@ public class PlayerAnimation : MonoBehaviour
     {        
         if (player.hasPath)
         {
-            anim.SetBool("Run", true);
-        }
-        else
-        {
-            anim.SetBool("Run", false);
-        }
+            anim.SetTrigger("Run");
+        }        
     }
 }
