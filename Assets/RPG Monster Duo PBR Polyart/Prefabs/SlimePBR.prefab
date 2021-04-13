@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 217728309721852239}
   - component: {fileID: 2223568269374594250}
   - component: {fileID: 8566892198161742156}
+  - component: {fileID: -3527409145802997522}
   m_Layer: 0
   m_Name: SlimePBR
   m_TagString: Untagged
@@ -359,7 +360,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919012471076396}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.9282043, z: 1}
@@ -374,7 +375,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 49
   m_AngularSpeed: 120
@@ -398,12 +399,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a9bf4b3aa7aac4aae328c41001e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: {fileID: 0}
-  player: []
+  enemy: {fileID: 0}
+  player:
+  - {fileID: 0}
   anim: {fileID: 0}
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16
+  state: 0
+--- !u!114 &-3527409145802997522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919012471076396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e553bfbdd2ed104296706d48f914912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 50
+  monster: {fileID: -3527409145802997522}
+  anim: {fileID: 95161444847813696}
+  enemy: {fileID: 8566892198161742156}
+  reGenSec: 1.3
 --- !u!1 &1989916952965676
 GameObject:
   m_ObjectHideFlags: 0
