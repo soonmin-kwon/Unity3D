@@ -10,7 +10,7 @@ public class Debuging : MonoBehaviour
 
     void LateUpdate()
     {
-        text.text = "State : " + enemy.state;
+        //text.text = "State : " + enemy.state;
     }
     
 }
