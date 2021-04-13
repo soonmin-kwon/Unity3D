@@ -14,8 +14,7 @@ public class RotateCamera : MonoBehaviour
     [SerializeField]
     private Transform target;
     private Vector3 cameraPosition;
-    public Vector3 offset;
-    public bool RotateAroundPlayer = true;
+    [SerializeField] private Vector3 offset;    
     
     void LateUpdate()
     {
