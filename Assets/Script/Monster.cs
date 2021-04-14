@@ -9,13 +9,17 @@ public class Monster : MonoBehaviour
     [SerializeField] Monster monster;
     [SerializeField] Animator anim;
     [SerializeField] EnemyMove enemy;
+    [SerializeField] HealthBarMonster healthBar;
     float dyingTime;
+
     [SerializeField] private float reGenSec = 1.3f;
-    // Update is called once per frame
+    
+    
     private void Awake()
-    {
+    {        
         objectPool = FindObjectOfType<Pool>();
         anim = GetComponent<Animator>();
+        healthBar.SetMaxHealth(hp);
     }    
 
     void Update()
@@ -32,6 +36,7 @@ public class Monster : MonoBehaviour
                 dyingTime = 0.0f;
                 anim.ResetTrigger("Attack");
                 enemy.state = EnemyMove.State.Idle;
+                healthBar.SetHealth(hp);
             }            
         }
     }
@@ -42,15 +47,7 @@ public class Monster : MonoBehaviour
             anim.SetTrigger("Hit");
             Debug.Log(hp);
             hp -= 10;
+            healthBar.SetHealth(hp);
         }
-    }
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Sword"))
-        {
-            Debug.Log(hp);
-            hp -= 10;
-        }
-    }
-
+    }   
 }
